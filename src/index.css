@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: #1E2F56;
+  }
+  body {
+    background-color: #070D1E;
+    color: #F1F5F9;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: 'Outfit', 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  .font-mono-code {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #070D1E;
+}
+::-webkit-scrollbar-thumb {
+  background: #1E2F56;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #06B6D4;
+}
+
+/* Radar & Pulse Animation */
+@keyframes radar-sweep {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.radar-spinner {
+  animation: radar-sweep 4s linear infinite;
+  transform-origin: center center;
+}
+
+/* Wind stream dash animation */
+@keyframes wind-dash {
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+.wind-stream {
+  stroke-dasharray: 8, 8;
+  animation: wind-dash 2s linear infinite;
+}
+
+/* Glassmorphism Subtle Cards */
+.brics-card {
+  background: linear-gradient(135deg, rgba(13, 23, 48, 0.85) 0%, rgba(9, 17, 36, 0.95) 100%);
+  border: 1px solid rgba(30, 47, 86, 0.8);
+  backdrop-filter: blur(12px);
+}
+
+.brics-card-glow {
+  box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.15);
+}
+
+.brics-card-alert {
+  box-shadow: 0 0 25px -5px rgba(239, 68, 68, 0.2);
+}
+
+/* Glowing text */
+.glow-cyan {
+  text-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
+}
+
+.glow-teal {
+  text-shadow: 0 0 12px rgba(20, 184, 166, 0.5);
+}
+
+.glow-alert {
+  text-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
+}
