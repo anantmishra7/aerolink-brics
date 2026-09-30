@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEROLINK BRICS - Executive Presentation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+    :root {
+      --bg-primary: #060b18;
+      --bg-secondary: #0b1528;
+      --card-bg: rgba(13, 25, 48, 0.75);
+      --card-border: rgba(56, 189, 248, 0.18);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-teal: #14b8a6;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #a855f7;
+      --gradient-accent: linear-gradient(135deg, #38bdf8 0%, #14b8a6 50%, #6366f1 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #030712;
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Print Setup for 16:9 PDF */
+    @page {
+      size: 1920px 1080px;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        background-color: var(--bg-primary) !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .slide-container {
+        display: block !important;
+        padding: 0 !important;
+      }
+      .slide {
+        page-break-after: always !important;
+        break-after: page !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        width: 1920px !important;
+        height: 1080px !important;
+        max-width: 1920px !important;
+        max-height: 1080px !important;
+      }
+    }
+
+    /* Presentation Screen Layout */
+    .controls-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 9999px;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 1000;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 0 15px rgba(56, 189, 248, 0.2);
+    }
+
+    .controls-bar button {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .controls-bar button:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: var(--accent-cyan);
+      transform: translateY(-1px);
+    }
+
+    .controls-bar button.primary {
+      background: linear-gradient(135deg, #0284c7, #0d9488);
+      border-color: #38bdf8;
+    }
+
+    .controls-bar button.primary:hover {
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+    }
+
+    .slide-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--accent-cyan);
+      min-width: 90px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .slide-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 0 120px 0;
+      gap: 40px;
+    }
+
+    /* 16:9 Slide Dimensions */
+    .slide {
+      width: 1920px;
+      height: 1080px;
+      background: radial-gradient(circle at top right, #11203b 0%, var(--bg-primary) 60%, #030712 100%);
+      border: 1px solid rgba(56, 189, 248, 0.15);
+      border-radius: 12px;
+      padding: 60px 80px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(14, 165, 233, 0.1);
+      overflow: hidden;
+    }
+
+    /* Decorative background grids & glow */
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .glow-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .glow-cyan {
+      width: 500px;
+      height: 500px;
+      background: #0ea5e9;
+      top: -100px;
+      right: -100px;
+    }
+
+    .glow-teal {
+      width: 450px;
+      height: 450px;
+      background: #10b981;
+      bottom: -100px;
+      left: 200px;
+    }
+
+    .slide-content-wrapper {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Header styling */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(14, 165, 233, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 9999px;
+      padding: 6px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+    }
+
+    .brand-pill .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 10px #38bdf8;
+    }
+
+    .slide-title-area h2 {
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .slide-title-area h2 span.gradient-text {
+      background: linear-gradient(135deg, #38bdf8, #2dd4bf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-subtitle {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 400;
+    }
+
+    .slide-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.3);
+      font-weight: 700;
+    }
+
+    /* Footer styling */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 20px;
+      margin-top: 28px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .slide-footer .track-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .slide-footer .badge-sm {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #cbd5e1;
+    }
+
+    /* Content Grids & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      flex: 1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      flex: 1;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      flex: 1;
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.4), transparent);
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      align-self: flex-start;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .badge-cyan {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+    }
+
+    .badge-teal {
+      background: rgba(20, 184, 166, 0.15);
+      border: 1px solid rgba(20, 184, 166, 0.4);
+      color: #2dd4bf;
+    }
+
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #fbbf24;
+    }
+
+    .badge-rose {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: #fb7185;
+    }
+
+    .badge-purple {
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: #c084fc;
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-desc {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Key Metric Blocks */
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .metric-box {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 14px;
+      padding: 22px 26px;
+      position: relative;
+    }
+
+    .metric-value {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-family: 'JetBrains Mono', monospace;
+      color: #38bdf8;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .metric-value span.unit {
+      font-size: 18px;
+      color: var(--text-muted);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+    }
+
+    .metric-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 6px;
+    }
+
+    /* Comparison Table */
+    .comp-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 12px;
+    }
+
+    .comp-table th {
+      background: rgba(30, 41, 59, 0.85);
+      color: #e2e8f0;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: left;
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .comp-table td {
+      padding: 18px 24px;
+      font-size: 16px;
+      line-height: 1.5;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    .comp-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comp-table .bad {
+      color: #f87171;
+    }
+
+    .comp-table .good {
+      color: #34d399;
+      font-weight: 600;
+    }
+
+    /* Architecture Flow Graphic */
+    .arch-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .arch-tier {
+      display: flex;
+      align-items: stretch;
+      gap: 20px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      padding: 16px 24px;
+    }
+
+    .tier-label {
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      padding-right: 20px;
+    }
+
+    .tier-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    .tier-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .tier-nodes {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .node-pill {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .node-pill.highlight {
+      background: rgba(14, 165, 233, 0.15);
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+
+    /* Timeline Milestones */
+    .milestone-timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .milestone-step {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .step-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.15);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .step-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* List items with icons */
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: #cbd5e1;
+    }
+
+    .feature-list .check-icon {
+      color: var(--accent-teal);
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Cover Slide Specifics */
+    .cover-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .cover-tagline {
+      font-size: 24px;
+      color: #38bdf8;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .cover-title {
+      font-size: 88px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+
+    .cover-title span {
+      background: linear-gradient(135deg, #38bdf8 0%, #2dd4bf 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-sub {
+      font-size: 26px;
+      color: #94a3b8;
+      max-width: 1100px;
+      line-height: 1.5;
+      margin-bottom: 40px;
+    }
+
+    .cover-badges {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cover-badge-pill {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cover-meta {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      font-size: 16px;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 24px;
+      width: 100%;
+      max-width: 900px;
+      justify-content: center;
+    }
+
+    .cover-meta strong {
+      color: #fff;
+    }
+
+    /* Visual diagrams inside cards */
+    .pipeline-bar {
+      display: flex;
+      align-items: center;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .pipeline-step {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #e2e8f0;
+    }
+
+    .pipeline-arrow {
+      color: var(--accent-cyan);
+      font-weight: bold;
+    }
+
+    /* Attribution Bar Chart */
+    .attribution-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .attr-label {
+      width: 280px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .attr-bar-container {
+      flex: 1;
+      height: 24px;
+      background: rgba(30, 41, 59, 0.6);
+      border-radius: 9999px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .attr-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Presentation HUD Controls (Hidden in Print) -->
+  <div class="controls-bar no-print">
+    <button onclick="prevSlide()">❮ Prev</button>
+    <div class="slide-counter" id="slideIndicator">Slide 1 / 12</div>
+    <button onclick="nextSlide()">Next ❯</button>
+    <button onclick="toggleFullScreen()">⛶ Fullscreen</button>
+    <button class="primary" onclick="window.print()">📥 Print / Save as PDF</button>
+  </div>
+
+  <div class="slide-container" id="presentationContainer">
+
+    <!-- ==========================================
+         SLIDE 1: COVER SLIDE
+         ========================================== -->
+    <section class="slide" id="slide-1">
+      <div class="glow-blob glow-cyan"></div>
+      <div class="glow-blob glow-teal"></div>
+      
+      <div class="cover-content">
+        <div class="brand-pill" style="margin-bottom: 24px;">
+          <span class="pulse-dot"></span>
+          Build with AI / Code for Community 2026 • Track 2: Clean Air & Climate Resilience
+        </div>
+        
+        <div class="cover-tagline">“See Pollution Earlier. Predict Its Movement. Coordinate Action.”</div>
+        
+        <h1 class="cover-title">
+          AEROLINK <span>BRICS</span>
+        </h1>
+        
+        <p class="cover-sub">
+          AI-Powered Federated Air Intelligence & Transboundary Climate Resilience Network
+          unifying hyper-local ground sensing, orbital remote telemetry, and sovereign cross-border coordination.
+        </p>
+
+        <div class="cover-badges">
+          <div class="cover-badge-pill">🛰️ Sentinel-5P & MODIS Orbital Ingestion</div>
+          <div class="cover-badge-pill">👁️ AeroVision Multimodal Computer Vision</div>
+          <div class="cover-badge-pill">🌪️ Lagrangian Transboundary Advection</div>
+          <div class="cover-badge-pill">🛡️ Sovereign Federated Learning (FedAvg-Clim)</div>
+          <div class="cover-badge-pill">⚖️ Human-in-the-Loop Authority Verification</div>
+        </div>
+
+        <div class="cover-meta">
+          <div>Author: <strong>Anant Mishra</strong></div>
+          <div>Repository: <strong>github.com/anantmishra7/aerolink-brics</strong></div>
+          <div>Tech: <strong>React 18 • TypeScript • Vite • Gemini 1.5 Flash</strong></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 2: THE PROBLEM STATEMENT
+         ========================================== -->
+    <section class="slide" id="slide-2">
+      <div class="glow-blob glow-cyan"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> Critical Air Quality Blindspots</div>
+            <h2>Why Megacities Miss <span class="gradient-text">Hyper-Local & Transboundary</span> Pollution</h2>
+            <div class="slide-subtitle">Current environmental monitoring stations are sparse, reactive, and geographically siloed.</div>
+          </div>
+          <div class="slide-number">02 / 12</div>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 20px;">
+          <div class="glass-card">
+            <span class="card-badge badge-rose">Spatial Blindspots</span>
+            <h3 class="card-title">Hyper-Local Omission</h3>
+            <p class="card-desc">
+              10–20 fixed government stations per megacity create massive 50 km² blindspots. Stubble fires, nocturnal brick kilns, unpaved industrial transit, and fugitive stack bypasses evade municipal sensors completely.
+            </p>
+          </div>
+
+          <div class="glass-card">
+            <span class="card-badge badge-amber">Vector Invisibility</span>
+            <h3 class="card-title">Transboundary Transport</h3>
+            <p class="card-desc">
+              Particulate matter (PM2.5) and gaseous precursors (NO2, SO2) do not respect jurisdictional borders. Seasonal winds carry toxic plumes 300+ km under thermal inversion lids, blind-siding downwind megacities.
+            </p>
+          </div>
+
+          <div class="glass-card">
+            <span class="card-badge badge-purple">Geopolitical Friction</span>
+            <h3 class="card-title">Data Siloing Across Borders</h3>
+            <p class="card-desc">
+              Sovereign nations and municipal agencies refuse to upload raw domestic telemetry or industrial emissions to centralized foreign servers, paralyzing coordinated multinational mitigation.
+            </p>
+          </div>
+        </div>
+
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Legacy Environmental Monitoring</th>
+              <th>AEROLINK BRICS Next-Gen Approach</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Spatial Resolution</strong></td>
+              <td class="bad">Sparse fixed CAAQMS (10–20 units, ~50 km² gaps)</td>
+              <td class="good">Fused Grid: Citizen IoT + Mobile Observers + Sub-km Orbital Remote Sensing</td>
+            </tr>
+            <tr>
+              <td><strong>Temporal Latency</strong></td>
+              <td class="bad">1 to 3-hour delayed batch telemetry reporting</td>
+              <td class="good">Real-time stream ingestion with sub-second in-browser AI vision inference</td>
+            </tr>
+            <tr>
+              <td><strong>Movement Physics</strong></td>
+              <td class="bad">Static dials showing current AQI without vector dynamics</td>
+              <td class="good">Lagrangian advection vectors predicting arrival ETAs and plume trajectories</td>
+            </tr>
+            <tr>
+              <td><strong>Data Sovereignty</strong></td>
+              <td class="bad">Requires risky centralized data lakes (frequently rejected)</td>
+              <td class="good">Federated Learning (FedAvg-Clim): Raw data stays local, only encrypted gradients shared</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">PROBLEM ANALYSIS</span>
+            <span>Eliminating the macro vs. hyper-local monitoring paradox across BRICS economic regions</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 3: THE SOLUTION OVERVIEW
+         ========================================== -->
+    <section class="slide" id="slide-3">
+      <div class="glow-blob glow-teal"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> The Solution Architecture</div>
+            <h2>AEROLINK BRICS: <span class="gradient-text">Unified Climate Intelligence</span></h2>
+            <div class="slide-subtitle">Bridging hyper-local ground observations and continental atmospheric dynamics.</div>
+          </div>
+          <div class="slide-number">03 / 12</div>
+        </div>
+
+        <div class="metric-row">
+          <div class="metric-box">
+            <div class="metric-value">4.5 - 6.0<span class="unit">hrs</span></div>
+            <div class="metric-label">Earlier Transboundary Warning</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">4<span class="unit">Sources</span></div>
+            <div class="metric-label">Attention-Weighted Data Fusion</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">+7.4<span class="unit">%</span></div>
+            <div class="metric-label">Federated Accuracy Gain (ε=0.75)</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-value">100<span class="unit">%</span></div>
+            <div class="metric-label">Human-in-the-Loop Accountability</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="glass-card">
+            <span class="card-badge badge-cyan">Core Pillar 01 & 02</span>
+            <h3 class="card-title">Multi-Source Fusion & Optical AI</h3>
+            <ul class="feature-list">
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Dynamic Attention-Weighted Data Fusion:</strong> Dynamically balances Satellite (30%), Ground (25%), Meteorology (25%), and Citizen reports (20%).</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>AeroVision Multimodal Vision Service:</strong> Leverages Google Gemini 1.5 Flash to classify smoke, industrial flaring, and agricultural burning from citizen photos with optical confidence.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Orbital Remote Sensing Correlation:</strong> Real-time cross-validation against Copernicus Sentinel-5P (NO2/SO2) and MODIS/VIIRS thermal fire radiance (MW/km²).</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="glass-card">
+            <span class="card-badge badge-teal">Core Pillar 03 & 04</span>
+            <h3 class="card-title">Predictive Physics & Sovereign Coordination</h3>
+            <ul class="feature-list">
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Lagrangian Plume Advection Tracker:</strong> Calculates real-time wind vectors, atmospheric boundary layer heights, and downwind arrival ETAs across national borders.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Economic Corridor Risk Monitoring:</strong> Live monitoring of critical supply chains (e.g. Delhi NCR–Agra, Beijing-Tianjin-Hebei, Mpumalanga Coal Belt).</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Sovereign Federated Learning (FedAvg-Clim):</strong> Trains collaborative dispersion models across BRICS nodes with Differential Privacy without exporting domestic sensor logs.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">SOLUTION FRAMEWORK</span>
+            <span>Comprehensive end-to-end climate resilience platform</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 4: SYSTEM ARCHITECTURE
+         ========================================== -->
+    <section class="slide" id="slide-4">
+      <div class="glow-blob glow-cyan"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> System Blueprint</div>
+            <h2>Full-Stack <span class="gradient-text">Five-Tier Modular Architecture</span></h2>
+            <div class="slide-subtitle">Resilient data pipelines from edge IoT ingestion to international policy execution.</div>
+          </div>
+          <div class="slide-number">04 / 12</div>
+        </div>
+
+        <div class="arch-flow">
+          <!-- Tier 1 -->
+          <div class="arch-tier">
+            <div class="tier-label">
+              <div class="tier-name">01. Multi-Source Ingestion</div>
+              <div class="tier-sub">Heterogeneous Data Feeds</div>
+            </div>
+            <div class="tier-nodes">
+              <div class="node-pill">📱 Citizen Photos & Micro-IoT</div>
+              <div class="node-pill">🏢 Reference CAAQMS (CPCB / MEE / CSIR)</div>
+              <div class="node-pill highlight">🛰️ Sentinel-5P, MODIS & VIIRS Infrared</div>
+              <div class="node-pill">🌪️ Synoptic Wind & Boundary Layer Met</div>
+            </div>
+          </div>
+
+          <!-- Tier 2 -->
+          <div class="arch-tier">
+            <div class="tier-label">
+              <div class="tier-name">02. AI Fusion & Vision</div>
+              <div class="tier-sub">Signal Reconciliation</div>
+            </div>
+            <div class="tier-nodes">
+              <div class="node-pill highlight">⚖️ Attention-Weighted Fusion Engine (4 Streams)</div>
+              <div class="node-pill highlight">🤖 AeroVision Multimodal Classifier (Gemini 1.5 Flash)</div>
+              <div class="node-pill">🔍 Sensor Calibration & Anomaly Filter</div>
+            </div>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="arch-tier">
+            <div class="tier-label">
+              <div class="tier-name">03. Predictive Intelligence</div>
+              <div class="tier-sub">Physics & Neural Modeling</div>
+            </div>
+            <div class="tier-nodes">
+              <div class="node-pill highlight">🚨 AI Hidden Hotspot Detector</div>
+              <div class="node-pill highlight">💨 Lagrangian Transboundary Plume Tracker</div>
+              <div class="node-pill">📈 Multi-Horizon Neural Forecaster (+1h to +24h)</div>
+              <div class="node-pill">💡 SHAP Risk Factor Decomposition</div>
+            </div>
+          </div>
+
+          <!-- Tier 4 -->
+          <div class="arch-tier">
+            <div class="tier-label">
+              <div class="tier-name">04. Action & Interoperability</div>
+              <div class="tier-sub">Policy & Decision Support</div>
+            </div>
+            <div class="tier-nodes">
+              <div class="node-pill highlight">🛡️ Authority Command Console (Human-in-the-Loop)</div>
+              <div class="node-pill">📢 Multi-Tiered Early Warnings (Advisory → Critical)</div>
+              <div class="node-pill highlight">🌐 JSON Schema v1.0.0-brics-interop</div>
+              <div class="node-pill">💬 AeroAI Floating Context Assistant</div>
+            </div>
+          </div>
+
+          <!-- Tier 5 -->
+          <div class="arch-tier">
+            <div class="tier-label">
+              <div class="tier-name">05. Sovereign Federated Layer</div>
+              <div class="tier-sub">Privacy-Preserving AI</div>
+            </div>
+            <div class="tier-nodes">
+              <div class="node-pill">🇮🇳 India CPCB Node</div>
+              <div class="node-pill">🇨🇳 China MEE Node</div>
+              <div class="node-pill">🇧🇷 Brazil INPE Node</div>
+              <div class="node-pill">🇿🇦 South Africa CSIR</div>
+              <div class="node-pill">🇷🇺 Russia Hydromet</div>
+              <div class="node-pill highlight">🔒 FedAvg-Clim Aggregator (ε = 0.75)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">TECHNICAL BLUEPRINT</span>
+            <span>Zero raw data leakage across sovereign international infrastructure</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 5: MULTI-SOURCE FUSION & AEROVISION
+         ========================================== -->
+    <section class="slide" id="slide-5">
+      <div class="glow-blob glow-teal"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> Multimodal AI Core</div>
+            <h2>Data Fusion Engine & <span class="gradient-text">AeroVision Optical AI</span></h2>
+            <div class="slide-subtitle">Transforming raw citizen uploads and multi-spectral satellite telemetry into actionable signals.</div>
+          </div>
+          <div class="slide-number">05 / 12</div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Fusion weights card -->
+          <div class="glass-card">
+            <span class="card-badge badge-cyan">Dynamic Attention Fusion</span>
+            <h3 class="card-title">Balancing Disparate Quality Streams</h3>
+            <p class="card-desc" style="margin-bottom: 20px;">
+              Raw citizen inputs or single satellite passes cannot be trusted in isolation. The engine applies dynamic attention weighting across 4 independent environmental channels:
+            </p>
+
+            <div class="attribution-row">
+              <div class="attr-label">🛰️ Satellite Remote Sensing (30%)</div>
+              <div class="attr-bar-container">
+                <div class="attr-bar-fill" style="width: 30%; background: #38bdf8;">30%</div>
+              </div>
+            </div>
+            <div class="attribution-row">
+              <div class="attr-label">🏢 Calibrated Ground CAAQMS (25%)</div>
+              <div class="attr-bar-container">
+                <div class="attr-bar-fill" style="width: 25%; background: #14b8a6;">25%</div>
+              </div>
+            </div>
+            <div class="attribution-row">
+              <div class="attr-label">🌪️ Synoptic Weather & Boundary (25%)</div>
+              <div class="attr-bar-container">
+                <div class="attr-bar-fill" style="width: 25%; background: #6366f1;">25%</div>
+              </div>
+            </div>
+            <div class="attribution-row">
+              <div class="attr-label">📱 Citizen Photos & Micro-IoT (20%)</div>
+              <div class="attr-bar-container">
+                <div class="attr-bar-fill" style="width: 20%; background: #ec4899;">20%</div>
+              </div>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.8); border-radius: 8px; padding: 14px; margin-top: 14px; border: 1px solid rgba(255,255,255,0.08); font-size: 13px; color: #94a3b8;">
+              <strong style="color: #38bdf8;">Adaptive Drift Compensation:</strong> If cloud cover blinds Sentinel-5P, weights instantly reallocate toward ground sensors and meteorological advection vectors.
+            </div>
+          </div>
+
+          <!-- AeroVision card -->
+          <div class="glass-card">
+            <span class="card-badge badge-teal">Gemini 1.5 Flash Vision</span>
+            <h3 class="card-title">AeroVision Optical Analysis Pipeline</h3>
+            <p class="card-desc">
+              Citizens submit geolocated smartphone photos of pollution plumes. The model extracts optical characteristics (plume opacity, color hue, dispersion geometry) to predict source etiology:
+            </p>
+
+            <div class="pipeline-bar">
+              <div class="pipeline-step">1. Citizen Upload<br/><span style="color:#94a3b8; font-size:11px;">Image + GPS</span></div>
+              <div class="pipeline-arrow">➔</div>
+              <div class="pipeline-step">2. Gemini Vision<br/><span style="color:#38bdf8; font-size:11px;">Feature Vector</span></div>
+              <div class="pipeline-arrow">➔</div>
+              <div class="pipeline-step">3. Classification<br/><span style="color:#2dd4bf; font-size:11px;">Stubble / Stack / Dust</span></div>
+              <div class="pipeline-arrow">➔</div>
+              <div class="pipeline-step">4. Validation<br/><span style="color:#f59e0b; font-size:11px;">Nearby Sensors</span></div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <h4 style="font-size: 15px; color: #fff; margin-bottom: 10px;">Classification Confidence Categories:</h4>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px;">
+                <div style="background: rgba(30,41,59,0.5); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #f59e0b;">🌾 Agricultural Biomass Burning (89%)</div>
+                <div style="background: rgba(30,41,59,0.5); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #ef4444;">🏭 Heavy Industrial Stack Plume (92%)</div>
+                <div style="background: rgba(30,41,59,0.5); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #38bdf8;">🚛 Roadway Transit & Fugitive Dust (84%)</div>
+                <div style="background: rgba(30,41,59,0.5); padding: 8px 12px; border-radius: 6px; border-left: 3px solid #10b981;">🧱 Unmonitored Brick Kiln Emission (87%)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">AI FUSION & VISION</span>
+            <span>Cross-verifying citizen optical inputs with space-borne multi-spectral instruments</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 6: TRANSBOUNDARY TRACKING & CORRIDORS
+         ========================================== -->
+    <section class="slide" id="slide-6">
+      <div class="glow-blob glow-cyan"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> Atmospheric Physics</div>
+            <h2>Transboundary Plume Tracking & <span class="gradient-text">Corridor Risk</span></h2>
+            <div class="slide-subtitle">Tracking cross-border advection vectors and arterial trade routes across BRICS economies.</div>
+          </div>
+          <div class="slide-number">06 / 12</div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Transboundary physics -->
+          <div class="glass-card">
+            <span class="card-badge badge-rose">Advection Physics</span>
+            <h3 class="card-title">Lagrangian Trajectory Modeling</h3>
+            <p class="card-desc" style="margin-bottom: 16px;">
+              Pollution does not stay stationary. AeroLink calculates forward trajectory vectors by coupling synoptic wind fields with nocturnal planetary boundary layer heights:
+            </p>
+            
+            <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; padding: 18px; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="font-weight: 700; color: #fff;">Simulated Plume Vector: #TRK-2026-IND-01</span>
+                <span style="color: #ef4444; font-weight: 700; font-size: 13px;">ACTIVE ADVECTION</span>
+              </div>
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #94a3b8; line-height: 1.8;">
+                • Origin: Punjab-Haryana Agricultural Margin (30.3° N, 75.8° E)<br/>
+                • Destination: Delhi NCR Urban Basin (28.6° N, 77.2° E)<br/>
+                • Transit Distance: 320 km | Advection Speed: 24 km/h NW → SE<br/>
+                • Inversion Ceiling: 45 meters (Critical Trapping Layer)<br/>
+                • Calculated Arrival ETA: <strong style="color: #38bdf8;">4.5 – 6.0 Hours</strong>
+              </div>
+            </div>
+
+            <p style="font-size: 14px; color: #cbd5e1;">
+              Provides authorities with decisive advance warning before high-density PM2.5 can descend upon urban populations.
+            </p>
+          </div>
+
+          <!-- Corridors -->
+          <div class="glass-card">
+            <span class="card-badge badge-amber">Economic Corridors</span>
+            <h3 class="card-title">Arterial Freight & Megacity Belts</h3>
+            <p class="card-desc" style="margin-bottom: 16px;">
+              Monitors cumulative risk across vital manufacturing hubs where emissions overlap with heavy logistics corridors:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="background: rgba(30, 41, 59, 0.6); border-radius: 8px; padding: 12px 16px; border-left: 4px solid #ef4444; display: flex; justify-content: space-between;">
+                <div>
+                  <div style="font-weight: 700; color: #fff; font-size: 14px;">🇮🇳 Delhi NCR ➔ Agra Industrial Corridor</div>
+                  <div style="font-size: 12px; color: #94a3b8;">Status: CRITICAL (AQI 378 Peak Expected)</div>
+                </div>
+                <div style="font-family: 'JetBrains Mono', monospace; color: #f87171; font-weight: 700;">+44% Risk</div>
+              </div>
+
+              <div style="background: rgba(30, 41, 59, 0.6); border-radius: 8px; padding: 12px 16px; border-left: 4px solid #f59e0b; display: flex; justify-content: space-between;">
+                <div>
+                  <div style="font-weight: 700; color: #fff; font-size: 14px;">🇨🇳 Jing-Jin-Ji Megacity Region (Beijing-Tianjin-Hebei)</div>
+                  <div style="font-size: 12px; color: #94a3b8;">Status: HIGH WATCH (NO2 Thermal Stagnation)</div>
+                </div>
+                <div style="font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700;">+28% Risk</div>
+              </div>
+
+              <div style="background: rgba(30, 41, 59, 0.6); border-radius: 8px; padding: 12px 16px; border-left: 4px solid #f59e0b; display: flex; justify-content: space-between;">
+                <div>
+                  <div style="font-weight: 700; color: #fff; font-size: 14px;">🇿🇦 Mpumalanga Coal Belt ➔ Gauteng Hub</div>
+                  <div style="font-size: 12px; color: #94a3b8;">Status: ELEVATED (SO2 Plume Drift)</div>
+                </div>
+                <div style="font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700;">+22% Risk</div>
+              </div>
+
+              <div style="background: rgba(30, 41, 59, 0.6); border-radius: 8px; padding: 12px 16px; border-left: 4px solid #10b981; display: flex; justify-content: space-between;">
+                <div>
+                  <div style="font-weight: 700; color: #fff; font-size: 14px;">🇧🇷 Santos Maritime Port ➔ São Paulo Metropole</div>
+                  <div style="font-size: 12px; color: #94a3b8;">Status: MODERATE (Maritime Sea Breeze Dispersal)</div>
+                </div>
+                <div style="font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 700;">Nominal</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">CORRIDOR MONITORING</span>
+            <span>Preventing regional industrial halts through early logistics rerouting</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 7: EXPLAINABLE AI & FORECASTING
+         ========================================== -->
+    <section class="slide" id="slide-7">
+      <div class="glow-blob glow-teal"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> Trust & Transparency</div>
+            <h2>Explainable AI (XAI) & <span class="gradient-text">Multi-Horizon Forecasting</span></h2>
+            <div class="slide-subtitle">Eliminating black-box mistrust by decomposing causal drivers with probabilistic bounds.</div>
+          </div>
+          <div class="slide-number">07 / 12</div>
+        </div>
+
+        <div class="grid-2">
+          <!-- XAI Attribution -->
+          <div class="glass-card">
+            <span class="card-badge badge-cyan">SHAP-Decomposed Attribution</span>
+            <h3 class="card-title">"Why Is Risk Increasing Right Now?"</h3>
+            <p class="card-desc" style="margin-bottom: 20px;">
+              Decision makers will not enforce economic restrictions or dispatch emergency crews based on opaque neural network outputs. AeroLink breaks down composite risk scores into quantifiable factors:
+            </p>
+
+            <div class="attribution-row">
+              <div class="attr-label">💨 Wind Vector Alignment with Urban Basin</div>
+              <div class="attr-bar-container">
+                <div class="attr-bar-fill" style="width: 32%; background: #38bdf8;">+32%</div>
+              </div>
+            </div>
+            <div class="attribution-row">
+              <div class="attr-label">🌾 Upwind Crop Fires & Citizen Photos</div>
+              <div class="attr-bar-container">
+                <div class="attr-bar-fill" style="width: 24%; background: #f59e0b;">+24%</div>
+              </div>
+            </div>
+            <div class="attribution-row">
+              <div class="attr-label">🛰️ Satellite Thermal Radiance (4.2 MW/km²)</div>
+              <div class="attr-bar-container">
+                <div class="attr-bar-fill" style="width: 18%; background: #ef4444;">+18%</div>
+              </div>
+            </div>
+            <div class="attribution-row">
+              <div class="attr-label">🌡️ Nocturnal Thermal Inversion Lid (45m)</div>
+              <div class="attr-bar-container">
+                <div class="attr-bar-fill" style="width: 15%; background: #a855f7;">+15%</div>
+              </div>
+            </div>
+            <div class="attribution-row">
+              <div class="attr-label">📈 Rural Sensor Telemetry Anomaly (+112)</div>
+              <div class="attr-bar-container">
+                <div class="attr-bar-fill" style="width: 11%; background: #14b8a6;">+11%</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 14px; background: rgba(14, 165, 233, 0.08); border-left: 3px solid #38bdf8; padding: 12px; font-size: 13px; color: #cbd5e1;">
+              <strong>Plain-Language Synthesis:</strong> Sustained 24 km/h north-westerly winds are advecting biomass smoke under a 45m inversion cap directly into the Delhi metropolitan basin.
+            </div>
+          </div>
+
+          <!-- Multi-Horizon Forecasting -->
+          <div class="glass-card">
+            <span class="card-badge badge-teal">Probabilistic Forecaster</span>
+            <h3 class="card-title">Multi-Horizon Predictions with 90% CI</h3>
+            <p class="card-desc" style="margin-bottom: 20px;">
+              Predicts future AQI and PM2.5 across +1h, +3h, +6h, +12h, and +24h windows with shaded uncertainty bounds reflecting meteorological turbulence:
+            </p>
+
+            <table class="comp-table" style="margin-top: 0;">
+              <thead>
+                <tr>
+                  <th>Horizon</th>
+                  <th>Predicted AQI</th>
+                  <th>PM2.5 (µg/m³)</th>
+                  <th>Confidence Interval (90%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Current (0h)</strong></td>
+                  <td style="color: #fbbf24; font-weight:700;">214 (Poor)</td>
+                  <td>112.4</td>
+                  <td style="font-family:'JetBrains Mono';">208 – 220</td>
+                </tr>
+                <tr>
+                  <td><strong>+3 Hours</strong></td>
+                  <td style="color: #fb923c; font-weight:700;">285 (Very Poor)</td>
+                  <td>168.0</td>
+                  <td style="font-family:'JetBrains Mono';">260 – 310</td>
+                </tr>
+                <tr>
+                  <td><strong>+6 Hours (Peak)</strong></td>
+                  <td style="color: #f87171; font-weight:700;">378 (Severe)</td>
+                  <td>236.8</td>
+                  <td style="font-family:'JetBrains Mono';">340 – 415</td>
+                </tr>
+                <tr>
+                  <td><strong>+12 Hours</strong></td>
+                  <td style="color: #fb923c; font-weight:700;">295 (Very Poor)</td>
+                  <td>175.2</td>
+                  <td style="font-family:'JetBrains Mono';">250 – 340</td>
+                </tr>
+                <tr>
+                  <td><strong>+24 Hours</strong></td>
+                  <td style="color: #fbbf24; font-weight:700;">228 (Poor)</td>
+                  <td>121.0</td>
+                  <td style="font-family:'JetBrains Mono';">180 – 275</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 14px; font-size: 13px; color: var(--text-muted);">
+              <span>Forecast Engine: GRU-Transformer Hybrid</span>
+              <span style="color: #38bdf8;">Peak Window: 18:00 – 22:00 IST</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">EXPLAINABLE AI</span>
+            <span>Empowering public health officials with explainable causal drivers</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 8: AUTHORITY RESPONSE CENTER
+         ========================================== -->
+    <section class="slide" id="slide-8">
+      <div class="glow-blob glow-cyan"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> Governance & Enforcement</div>
+            <h2>Authority Response Center: <span class="gradient-text">Human-in-the-Loop</span></h2>
+            <div class="slide-subtitle">AI Recommends ➔ Human Verifies ➔ Authority Acts with full legal and regulatory chain-of-custody.</div>
+          </div>
+          <div class="slide-number">08 / 12</div>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 24px;">
+          <div class="glass-card">
+            <span class="card-badge badge-rose">Protocol 1</span>
+            <h3 class="card-title">1. Anomaly Flagged</h3>
+            <p class="card-desc">
+              AI triggers early warning alert #ALT-IN-2026-004. Anomaly score 0.94 correlates satellite fire pixels with rural IoT surge.
+            </p>
+          </div>
+          <div class="glass-card">
+            <span class="card-badge badge-amber">Protocol 2</span>
+            <h3 class="card-title">2. Human Verification</h3>
+            <p class="card-desc">
+              Environmental Duty Officer inspects optical evidence, wind vectors, and model attributions. Zero automated fines or closures.
+            </p>
+          </div>
+          <div class="glass-card">
+            <span class="card-badge badge-teal">Protocol 3</span>
+            <h3 class="card-title">3. Coordinated Dispatch</h3>
+            <p class="card-desc">
+              Officer triggers verified action: Anti-smog mist cannon deployment, inter-state advisory dispatch, and Stage-IV GRAP enforcement.
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <span class="card-badge badge-cyan">Auditable Action Matrix</span>
+          <h3 class="card-title">Six Standard Operational Mitigations</h3>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 10px;">
+            <div style="background: rgba(30, 41, 59, 0.5); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-weight: 700; color: #38bdf8; margin-bottom: 4px;">🚒 Dispatch Mobile Rapid Unit</div>
+              <div style="font-size: 13px; color: #94a3b8;">Deploys smog cannons and mobile inspection vans directly to upwind hotspots.</div>
+            </div>
+            <div style="background: rgba(30, 41, 59, 0.5); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-weight: 700; color: #2dd4bf; margin-bottom: 4px;">📢 Issue Public Health Advisory</div>
+              <div style="font-size: 13px; color: #94a3b8;">Sends targeted mobile broadcast alerts to schools, hospitals, and high-risk citizens.</div>
+            </div>
+            <div style="background: rgba(30, 41, 59, 0.5); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-weight: 700; color: #fbbf24; margin-bottom: 4px;">🌐 Notify Neighboring Region</div>
+              <div style="font-size: 13px; color: #94a3b8;">Transmits structured transboundary alert payload via JSON schema to adjacent state/country.</div>
+            </div>
+            <div style="background: rgba(30, 41, 59, 0.5); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-weight: 700; color: #f87171; margin-bottom: 4px;">🛑 Industrial Throttling / GRAP</div>
+              <div style="font-size: 13px; color: #94a3b8;">Temporarily dials back coal thermal outputs and pauses non-essential road construction.</div>
+            </div>
+            <div style="background: rgba(30, 41, 59, 0.5); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-weight: 700; color: #a855f7; margin-bottom: 4px;">📡 Ramp IoT Telemetry Frequency</div>
+              <div style="font-size: 13px; color: #94a3b8;">Commands nearby sensor mesh to increase sampling frequency from 15 min to 1 min.</div>
+            </div>
+            <div style="background: rgba(30, 41, 59, 0.5); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-weight: 700; color: #34d399; margin-bottom: 4px;">✅ Post-Mitigation Resolution Log</div>
+              <div style="font-size: 13px; color: #94a3b8;">Logs full forensic chain for historical model retraining and compliance audits.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">ETHICAL AI</span>
+            <span>Preventing algorithmic bias and ensuring constitutional due process in environmental enforcement</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 9: FEDERATED CLIMATE AI
+         ========================================== -->
+    <section class="slide" id="slide-9">
+      <div class="glow-blob glow-teal"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> Sovereign AI Architecture</div>
+            <h2>Federated Climate AI: <span class="gradient-text">FedAvg-Clim Protocol</span></h2>
+            <div class="slide-subtitle">Collaborative multinational intelligence with zero raw data leaves sovereign borders.</div>
+          </div>
+          <div class="slide-number">09 / 12</div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Sovereign nodes -->
+          <div class="glass-card">
+            <span class="card-badge badge-cyan">Sovereign Node Cluster</span>
+            <h3 class="card-title">Participating National Nodes</h3>
+            <p class="card-desc" style="margin-bottom: 16px;">
+              Each nation hosts an autonomous sovereign edge container deployed inside its domestic infrastructure:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="background: rgba(30,41,59,0.6); padding: 10px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🇮🇳 <strong>India (CPCB Cloud, New Delhi)</strong></span>
+                <span style="font-family:'JetBrains Mono'; color:#34d399; font-size:12px;">Active • Round 18</span>
+              </div>
+              <div style="background: rgba(30,41,59,0.6); padding: 10px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🇨🇳 <strong>China (MEE Supercomputing, Beijing)</strong></span>
+                <span style="font-family:'JetBrains Mono'; color:#34d399; font-size:12px;">Active • Round 18</span>
+              </div>
+              <div style="background: rgba(30,41,59,0.6); padding: 10px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🇧🇷 <strong>Brazil (INPE Earth Observation, São Paulo)</strong></span>
+                <span style="font-family:'JetBrains Mono'; color:#34d399; font-size:12px;">Active • Round 18</span>
+              </div>
+              <div style="background: rgba(30,41,59,0.6); padding: 10px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🇿🇦 <strong>South Africa (CSIR Meraka, Pretoria)</strong></span>
+                <span style="font-family:'JetBrains Mono'; color:#34d399; font-size:12px;">Active • Round 18</span>
+              </div>
+              <div style="background: rgba(30,41,59,0.6); padding: 10px 14px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span>🇷🇺 <strong>Russia (Roshydromet Hydro-Met, Moscow)</strong></span>
+                <span style="font-family:'JetBrains Mono'; color:#34d399; font-size:12px;">Active • Round 18</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 14px; font-size: 13px; color: #94a3b8; line-height: 1.5;">
+              <strong style="color: #38bdf8;">Differential Privacy Guarantee:</strong> Gaussian noise injected with privacy budget <strong>ε = 0.75, δ = 10⁻⁵</strong>, guaranteeing that individual industrial plants or telemetry points cannot be reverse-engineered.
+            </div>
+          </div>
+
+          <!-- Convergence Metrics -->
+          <div class="glass-card">
+            <span class="card-badge badge-teal">Global Model Convergence</span>
+            <h3 class="card-title">Federated Aggregation Metrics</h3>
+            <p class="card-desc" style="margin-bottom: 16px;">
+              Iterative rounds of FedAvg-Clim combine localized atmospheric insights into a robust global neural model:
+            </p>
+
+            <table class="comp-table" style="margin-top: 0;">
+              <thead>
+                <tr>
+                  <th>Round</th>
+                  <th>Nodes</th>
+                  <th>Loss (MSE)</th>
+                  <th>Accuracy Gain</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-family:'JetBrains Mono';">Round 01</td>
+                  <td>5 / 5</td>
+                  <td>0.482</td>
+                  <td>Baseline</td>
+                  <td>Converged</td>
+                </tr>
+                <tr>
+                  <td style="font-family:'JetBrains Mono';">Round 06</td>
+                  <td>5 / 5</td>
+                  <td>0.312</td>
+                  <td style="color:#34d399;">+3.2%</td>
+                  <td>Converged</td>
+                </tr>
+                <tr>
+                  <td style="font-family:'JetBrains Mono';">Round 12</td>
+                  <td>5 / 5</td>
+                  <td>0.219</td>
+                  <td style="color:#34d399;">+5.8%</td>
+                  <td>Converged</td>
+                </tr>
+                <tr>
+                  <td style="font-family:'JetBrains Mono';">Round 18</td>
+                  <td>5 / 5</td>
+                  <td>0.164</td>
+                  <td style="color:#34d399; font-weight:700;">+7.4%</td>
+                  <td>Current Active</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style="background: rgba(15, 23, 42, 0.85); border-radius: 8px; padding: 14px; margin-top: 14px; border: 1px solid rgba(255,255,255,0.08);">
+              <div style="font-size: 13px; color: #fff; font-weight: 700; margin-bottom: 4px;">Why It Matters to International Law:</div>
+              <div style="font-size: 12px; color: #cbd5e1; line-height: 1.5;">
+                Solves the fundamental political dilemma of transboundary climate agreements: Nations gain superior predictive power from neighboring meteorological phenomena without surrendering sensitive sovereignty data.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">SOVEREIGN AI</span>
+            <span>Mathematical guarantee of privacy in international climate diplomacy</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 10: JUDGE DEMO MODE WALKTHROUGH
+         ========================================== -->
+    <section class="slide" id="slide-10">
+      <div class="glow-blob glow-cyan"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> Interactive Evaluation</div>
+            <h2>Judge Demo Mode: <span class="gradient-text">Cross-Border Smoke Event</span></h2>
+            <div class="slide-subtitle">A ten-step end-to-end evidence chain demonstrating complete operational maturity.</div>
+          </div>
+          <div class="slide-number">10 / 12</div>
+        </div>
+
+        <div class="milestone-timeline">
+          <div class="milestone-step">
+            <span class="step-number">Step 01</span>
+            <div class="step-title">Citizen Upload</div>
+            <div class="step-text">Geolocated smoke photo (#REP-8812) uploaded near border with 194.2 µg/m³ PM2.5 reading.</div>
+          </div>
+
+          <div class="milestone-step">
+            <span class="step-number">Step 02</span>
+            <div class="step-title">AI Vision Scan</div>
+            <div class="step-text">Gemini 1.5 Flash classifies "Agricultural biomass burning" with 89% optical confidence.</div>
+          </div>
+
+          <div class="milestone-step">
+            <span class="step-number">Step 03</span>
+            <div class="step-title">Sensor Surge</div>
+            <div class="step-text">Peripheral rural IoT mesh detects +112 µg/m³ spike in under 90 minutes.</div>
+          </div>
+
+          <div class="milestone-step">
+            <span class="step-number">Step 04</span>
+            <div class="step-title">Orbital Thermal</div>
+            <div class="step-text">Sentinel-5P / MODIS confirms 4.2 MW/km² radiative fire cluster (#9914).</div>
+          </div>
+
+          <div class="milestone-step">
+            <span class="step-number">Step 05</span>
+            <div class="step-title">Wind Vector</div>
+            <div class="step-text">Synoptic grid models 24 km/h NW → SE advection trapped under 45m inversion.</div>
+          </div>
+        </div>
+
+        <div class="milestone-timeline" style="margin-top: 14px;">
+          <div class="milestone-step">
+            <span class="step-number">Step 06</span>
+            <div class="step-title">Plume Trajectory</div>
+            <div class="step-text">Lagrangian tracker calculates 320 km corridor transit with 4.5–6.0h arrival ETA.</div>
+          </div>
+
+          <div class="milestone-step">
+            <span class="step-number">Step 07</span>
+            <div class="step-title">Corridor Alarm</div>
+            <div class="step-text">Delhi NCR ➔ Agra Industrial Belt risk escalates from MODERATE to CRITICAL.</div>
+          </div>
+
+          <div class="milestone-step">
+            <span class="step-number">Step 08</span>
+            <div class="step-title">Peak Forecast</div>
+            <div class="step-text">Forecaster predicts Delhi AQI will peak at 378 (PM2.5: 236 µg/m³) by evening.</div>
+          </div>
+
+          <div class="milestone-step">
+            <span class="step-number">Step 09</span>
+            <div class="step-title">Warning Dispatch</div>
+            <div class="step-text">Automated alert #ALT-IN-2026-004 sent to CPCB and CAQM command centers.</div>
+          </div>
+
+          <div class="milestone-step" style="border-color: #38bdf8; background: rgba(14, 165, 233, 0.15);">
+            <span class="step-number" style="background:#38bdf8; color:#0f172a;">Step 10</span>
+            <div class="step-title" style="color:#38bdf8;">Human Action</div>
+            <div class="step-text">Duty Officer confirms evidence, activates mist cannons, and enforces Stage-IV GRAP.</div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">DEMO PROTOCOL</span>
+            <span>Click "Launch Judge Demo" in the platform header to step through this sequence interactively</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 11: TECH STACK & SCIENTIFIC RIGOR
+         ========================================== -->
+    <section class="slide" id="slide-11">
+      <div class="glow-blob glow-teal"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> Engineering Excellence</div>
+            <h2>Technology Stack & <span class="gradient-text">Scientific Standards</span></h2>
+            <div class="slide-subtitle">Modern web architecture designed for low-latency command centers and high-fidelity rendering.</div>
+          </div>
+          <div class="slide-number">11 / 12</div>
+        </div>
+
+        <div class="grid-2">
+          <!-- Tech Stack -->
+          <div class="glass-card">
+            <span class="card-badge badge-cyan">Full-Stack Implementation</span>
+            <h3 class="card-title">Production-Grade Architecture</h3>
+            <ul class="feature-list">
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Frontend Framework:</strong> React 18, TypeScript, Vite 5 for sub-millisecond hot reloading and type-safe state governance.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Geospatial Vector Engine:</strong> Leaflet & Custom Animated SVG Vector Mesh rendering 12 interactive layers with zero frame drops.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Data Visualization:</strong> Recharts with confidence interval bands and historical federated training curves.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Multimodal AI:</strong> Google Gemini 1.5 Flash Vision API integration paired with local client-side fallbacks.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Open Interoperability:</strong> JSON Schema <code>v1.0.0-brics-interop</code> for REST & gRPC enterprise integration.</div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Scientific & Ethical Rigor -->
+          <div class="glass-card">
+            <span class="card-badge badge-teal">Scientific Integrity</span>
+            <h3 class="card-title">Ethics, Transparency & Standards</h3>
+            <ul class="feature-list">
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Explicit Simulation Badges:</strong> Every simulated or demo dataset displays prominent <code>[SIMULATION / DEMO DATA]</code> indicators to prevent misrepresentation.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Prudent Optical Classification:</strong> Models never claim definitive legal causality from images alone; labels are classified as <em>"Potential Source Estimates"</em> requiring multi-sensor cross-validation.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Zero Algorithmic Punishment:</strong> Algorithmic suggestions cannot automatically issue citations, fine factories, or halt transit without human officer approval.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Data Locality Guarantees:</strong> Compliant with national data sovereignty laws (India DPDP Act, China PIPL, Brazil LGPD).</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">ENGINEERING RIGOR</span>
+            <span>Built for high availability, zero latency, and strict legal compliance</span>
+          </div>
+          <div>AeroLink BRICS Executive Deck</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         SLIDE 12: IMPACT, ROADMAP & CONCLUSION
+         ========================================== -->
+    <section class="slide" id="slide-12">
+      <div class="glow-blob glow-cyan"></div>
+      <div class="glow-blob glow-teal"></div>
+      <div class="slide-content-wrapper">
+        <div class="slide-header">
+          <div class="slide-title-area">
+            <div class="brand-pill"><span class="pulse-dot"></span> Future Horizon</div>
+            <h2>Impact, Strategic Roadmap & <span class="gradient-text">Conclusion</span></h2>
+            <div class="slide-subtitle">Transforming international air quality governance from reactive despair to proactive resilience.</div>
+          </div>
+          <div class="slide-number">12 / 12</div>
+        </div>
+
+        <div class="grid-3" style="margin-bottom: 24px;">
+          <div class="glass-card">
+            <span class="card-badge badge-cyan">Quantifiable Impact</span>
+            <h3 class="card-title">4.5 - 6.0 Hours</h3>
+            <p class="card-desc">
+              Advance warning window enables hospital emergency wings to prepare respiratory wards, schools to cancel outdoor sports, and dust-suppression cannons to deploy before plumes hit.
+            </p>
+          </div>
+
+          <div class="glass-card">
+            <span class="card-badge badge-teal">Economic Savings</span>
+            <h3 class="card-title">Logistics Resilience</h3>
+            <p class="card-desc">
+              Rerouting freight corridors prior to acute smog lock-ins saves millions in perishable goods and prevents catastrophic multi-vehicle highway pile-ups in dense smog.
+            </p>
+          </div>
+
+          <div class="glass-card">
+            <span class="card-badge badge-purple">Diplomatic Breakthrough</span>
+            <h3 class="card-title">Sovereign Commons</h3>
+            <p class="card-desc">
+              Unlocks mutual climate collaboration between BRICS allies without geopolitical deadlock or fear of intelligence vulnerability.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="glass-card">
+            <span class="card-badge badge-amber">Development Roadmap</span>
+            <h3 class="card-title">Next-Phase Milestones</h3>
+            <div style="font-size: 14px; color: #cbd5e1; line-height: 1.7;">
+              • <strong>Phase 1 (Q4 2026):</strong> On-device WebAssembly/TensorFlow.js edge model deployment for offline citizen plume detection.<br/>
+              • <strong>Phase 2 (Q1 2027):</strong> Direct orbital tasking integration with the BRICS Earth Observation Satellite Constellation.<br/>
+              • <strong>Phase 3 (Q2 2027):</strong> Expansion to maritime shipping emissions corridors in the Indian and Atlantic Oceans.
+            </div>
+          </div>
+
+          <div class="glass-card" style="border-color: #38bdf8; background: rgba(14, 165, 233, 0.12);">
+            <span class="card-badge badge-cyan">Project Links & Access</span>
+            <h3 class="card-title">Experience the Platform</h3>
+            <div style="font-size: 14px; color: #cbd5e1; line-height: 1.8;">
+              • <strong>GitHub Repository:</strong> <a href="https://github.com/anantmishra7/aerolink-brics" target="_blank" style="color: #38bdf8; text-decoration: underline;">github.com/anantmishra7/aerolink-brics</a><br/>
+              • <strong>Local Development:</strong> <code>npm run dev</code> on <code>http://localhost:5173</code><br/>
+              • <strong>Judge Demo:</strong> One-click interactive walkthrough in platform header<br/>
+              • <strong>Contact:</strong> Anant Mishra (anantm408@gmail.com)
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-footer">
+          <div class="track-info">
+            <span class="badge-sm">BUILD WITH AI 2026</span>
+            <span>AeroLink BRICS: See Pollution Earlier. Predict Its Movement. Coordinate Action.</span>
+          </div>
+          <div>Thank You • Q&A Session</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 12;
+
+    function updateSlide() {
+      document.getElementById('slideIndicator').innerText = `Slide ${currentSlide} / ${totalSlides}`;
+      const slideElem = document.getElementById(`slide-${currentSlide}`);
+      if (slideElem) {
+        slideElem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.error(err);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      } else if (e.key === 'p' || e.key === 'P') {
+        window.print();
+      }
+    });
+  </script>
+</body>
+</html>
