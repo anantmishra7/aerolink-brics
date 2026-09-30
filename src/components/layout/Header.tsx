@@ -15,7 +15,8 @@ import {
   Play,
   AlertTriangle,
   Info,
-  CheckCircle2
+  CheckCircle2,
+  FileDown
 } from 'lucide-react';
 import { BRICS_CITIES } from '../../data/mockData';
 
@@ -156,6 +157,19 @@ export const Header: React.FC = () => {
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>{isJudgeDemoActive ? 'Exit Judge Demo' : 'Launch Judge Demo'}</span>
           </button>
+
+          {/* Presentation PDF Download Button */}
+          <a
+            href="/AeroLink_BRICS_Presentation.pdf"
+            download="AeroLink_BRICS_Presentation.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-semibold shadow-md shadow-blue-500/20 transition-all cursor-pointer"
+            title="Download Executive Presentation Deck (PDF)"
+          >
+            <FileDown className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Deck (PDF)</span>
+          </a>
 
           {/* AeroAI Chatbot Trigger */}
           <button
